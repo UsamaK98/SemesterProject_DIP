@@ -1,0 +1,12 @@
+{
+    "V_GEST": "move_mouse",
+    "FIST": "handle_drag",
+    "MID": "handle_left_click",
+    "INDEX": "handle_right_click",
+    "TWO_FINGER_CLOSED": "handle_double_click",
+    "PINCH_MINOR": "handle_scroll",
+    "PINCH_MAJOR": "handle_system_volume",
+    "PALM": "handle_palm"
+}
+
+

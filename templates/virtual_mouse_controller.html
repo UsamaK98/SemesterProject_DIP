@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture Control</title>
+</head>
+<body>
+    <button onclick="window.history.back();">Back</button>
+    <h1>Gesture Control</h1>
+    <img src="{{ url_for('video_feed') }}" alt="Live Video Stream">
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+
+    <script>
+        const startButton = document.getElementById("start");
+        const stopButton = document.getElementById("stop");
+
+        startButton.addEventListener("click", () => {
+            // Send a request to the server to start gesture detection
+            fetch("/start_gesture_detection");
+        });
+
+        stopButton.addEventListener("click", () => {
+            // Send a request to the server to stop gesture detection
+            fetch("/stop_gesture_detection");
+        });
+    </script>
+</body>
+</html>

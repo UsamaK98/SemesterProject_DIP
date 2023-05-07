@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+</head>
+<body>
+    <button onclick="window.history.back();">Back</button>
+    <h1>Settings</h1>
+    <p>Map gestures to actions:</p>
+    <form action="/save_mappings" method="post">
+        <div>
+            <label for="gesture_1">Gesture 1:</label>
+            <select name="gesture_1" id="gesture_1">
+                <!-- Add your gesture options here -->
+                <option value="gesture_1_option_1">Gesture 1 Option 1</option>
+                <option value="gesture_1_option_2">Gesture 1 Option 2</option>
+            </select>
+
+            <label for="action_1">Action:</label>
+            <select name="action_1" id="action_1">
+                <!-- Add your action options here -->
+                <option value="action_1_option_1">Action 1 Option 1</option>
+                <option value="action_1_option_2">Action 1 Option 2</option>
+            </select>
+        </div>
+
+        <!-- Add more gesture and action mappings as needed -->
+        
+        <input type="submit" value="Save Mappings">
+    </form>
+</body>
+</html>
