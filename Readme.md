@@ -10,9 +10,9 @@ This project aims to implement a gesture-controlled virtual mouse using OpenCV, 
 - Works with multi-hand input by detecting the predominant hand.
 - Uses Mediapipe's pose estimation to localize hand and finger landmarks and track their movement.
 - Applies dampening to stabilize mouse movements.
-- Incorporates a pinch control mechanism for vertical scrolling or adjusting the system volume.
+- Incorporates a pinch control mechanism for vertical scrolling [Disabled] or adjusting the system volume.
 - Background color change option using hand gestures (thumbs up -> black & thumbs down -> white). [Disabled]
-- Integrates with PyAudio to adjust sound levels based on pinch input. [Disabled]
+- Integrates with PyAudio to adjust sound levels based on pinch input. 
 
 ### Optional Features - (To be added)
 
