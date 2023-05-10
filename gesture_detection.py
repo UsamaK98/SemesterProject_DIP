@@ -295,10 +295,22 @@ class Controller:
 
     @classmethod
     def handle_scroll(cls, hand_result):
-        if cls.pinchminorflag == False:
-            cls.pinch_control_init(hand_result)
-            cls.pinchminorflag = True
-        cls.pinch_control(hand_result, cls.scrollHorizontal, cls.scrollVertical)
+        # Extract the index finger and thumb landmarks
+        thumb_tip = hand_result.landmark[cls.THUMB_TIP]
+        index_tip = hand_result.landmark[cls.INDEX_TIP]
+
+        # Calculate the distance between the thumb and index finger
+        distance = math.sqrt((thumb_tip.x - index_tip.x)**2 + (thumb_tip.y - index_tip.y)**2)
+
+        # Define a threshold for the pinch gesture
+        pinch_threshold = 0.03
+
+        if distance < pinch_threshold:
+            # Calculate the vertical movement of the hand
+            hand_movement = hand_result.landmark[cls.WRIST].y - hand_result.landmark[cls.MIDDLE_TIP].y
+            scroll_amount = int(hand_movement * 500)
+            pyautogui.scroll(scroll_amount)
+
 
     @classmethod
     def handle_system_volume(cls, hand_result):
@@ -357,71 +369,30 @@ class Controller:
     @classmethod
     def handle_controls(cls, gesture, hand_result):
         if gesture.name is not None:
+             # Check if the binary encoding of the gesture is in the allowed set
+            allowed_encodings = {0, 1, 2, 4, 7, 8, 12, 15, 16, 31, 33, 34, 35, 36}
             #print(gesture.name)
-            gesture_name = gesture.name
-            cls.execute_action(gesture_name, hand_result)
-        """ if gesture == Gest.PALM:
-            cls.execute_action("PALM", hand_result)
-        elif gesture == Gest.V_GEST:
-            cls.execute_action("V_GEST", hand_result)
-        elif gesture == Gest.TWO_FINGER_CLOSED:
-            cls.execute_action("TWO_FINGER_CLOSED", hand_result)
-        elif gesture == Gest.PINCH_MAJOR:
-            cls.execute_action("PINCH_MAJOR", hand_result)
-        elif gesture == Gest.PINCH_MINOR:
-            cls.execute_action("PINCH_MINOR", hand_result) """
+            if gesture.binary_encoding in allowed_encodings:
+                if gesture == Gest.PINCH_MINOR:
+                    if cls.pinchminorflag == False:
+                        cls.pinch_control_init(hand_result)
+                        cls.pinchminorflag = True
+                    #cls.pinch_control(hand_result, cls.scrollHorizontal, cls.scrollVertical)
+                    cls.handle_scroll(hand_result)
+                elif gesture == Gest.PINCH_MAJOR:
+                    if cls.pinchmajorflag == False:
+                        cls.pinch_control_init(hand_result)
+                        cls.pinchmajorflag = True
+                    cls.pinch_control(hand_result, cls.changesystemvolume)
+                else:
 
-''' def handle_controls(gesture, hand_result):        
-        x,y = None,None
-        if gesture != Gest.PALM :
-            x,y = Controller.get_position(hand_result)
-        
-        # flag reset
-        if gesture != Gest.FIST and Controller.grabflag:
-            Controller.grabflag = False
-            pyautogui.mouseUp(button = "left")
-
-        if gesture != Gest.PINCH_MAJOR and Controller.pinchmajorflag:
-            Controller.pinchmajorflag = False
-
-        if gesture != Gest.PINCH_MINOR and Controller.pinchminorflag:
-            Controller.pinchminorflag = False
-
-        # implementation
-        if gesture == Gest.V_GEST:
-            Controller.flag = True
-            pyautogui.moveTo(x, y, duration = 0.1)
-
-        elif gesture == Gest.FIST:
-            if not Controller.grabflag : 
-                Controller.grabflag = True
-                pyautogui.mouseDown(button = "left")
-            pyautogui.moveTo(x, y, duration = 0.1)
-
-        elif gesture == Gest.MID and Controller.flag:
-            pyautogui.click()
-            Controller.flag = False
-
-        elif gesture == Gest.INDEX and Controller.flag:
-            pyautogui.click(button='right')
-            Controller.flag = False
-
-        elif gesture == Gest.TWO_FINGER_CLOSED and Controller.flag:
-            pyautogui.doubleClick()
-            Controller.flag = False
-
-        elif gesture == Gest.PINCH_MINOR:
-            if Controller.pinchminorflag == False:
-                Controller.pinch_control_init(hand_result)
-                Controller.pinchminorflag = True
-            Controller.pinch_control(hand_result,Controller.scrollHorizontal, Controller.scrollVertical)
-        
-        elif gesture == Gest.PINCH_MAJOR:
-            if Controller.pinchmajorflag == False:
-                Controller.pinch_control_init(hand_result)
-                Controller.pinchmajorflag = True
-            Controller.pinch_control(hand_result, Controller.changesystemvolume) '''
-        
+                    gesture_name = gesture.name
+                    cls.pinchmajorflag=False
+                    cls.pinchminorflag=False
+                    cls.execute_action(gesture_name, hand_result)
+            else:
+                print(f"Gesture {gesture.name} with binary encoding {gesture.binary_encoding} is not allowed.")
+      
 '''
 ----------------------------------------  Main Class  ----------------------------------------
     Entry point of Gesture Controller
