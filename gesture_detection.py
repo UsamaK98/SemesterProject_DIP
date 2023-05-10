@@ -319,11 +319,18 @@ class Controller:
 
     # read_mappings: 
     # This method reads the gesture mappings from a 'mappings.txt' file and converts it to a dictionary.
-    @staticmethod
-    def read_mappings(file_path='mappings.txt'):
-        with open(file_path, 'r') as file:
-            mappings = json.load(file)
+    @classmethod
+    def read_mappings(cls):
+        with open('mappings.txt', 'r') as f:
+            lines = f.readlines()
+
+        mappings = {}
+        for line in lines:
+            if line.strip():
+                gesture, action = line.strip().split(':')
+                mappings[gesture] = action
         return mappings
+
     
     # execute_action:
     # This method takes a gesture name as input and executes the corresponding action method based on the gesture mappings.

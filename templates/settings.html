@@ -6,29 +6,54 @@
     <title>Settings</title>
 </head>
 <body>
-    <button onclick="window.history.back();">Back</button>
     <h1>Settings</h1>
-    <p>Map gestures to actions:</p>
-    <form action="/save_mappings" method="post">
-        <div>
-            <label for="gesture_1">Gesture 1:</label>
-            <select name="gesture_1" id="gesture_1">
-                <!-- Add your gesture options here -->
-                <option value="gesture_1_option_1">Gesture 1 Option 1</option>
-                <option value="gesture_1_option_2">Gesture 1 Option 2</option>
-            </select>
+    <button onclick="window.history.back();">Back</button>
+    
+    <form action="/update_gesture_mappings" method="post">
+        <label for="action1">Move mouse:</label>
+        <select name="move_mouse" id="action1">
+            <option value="V_GEST">V_GEST - default</option>
+            <option value="FIST">FIST</option>
+            <option value="PALM">PALM</option>
+        </select>
 
-            <label for="action_1">Action:</label>
-            <select name="action_1" id="action_1">
-                <!-- Add your action options here -->
-                <option value="action_1_option_1">Action 1 Option 1</option>
-                <option value="action_1_option_2">Action 1 Option 2</option>
-            </select>
-        </div>
+        <label for="action2">Left Click:</label>
+        <select name="handle_left_click" id="action2">
+            <option value="INDEX">INDEX - default</option>
+            <option value="THUMB">THUMB</option>
+            <option value="MID">MID</option>
+        </select>
 
-        <!-- Add more gesture and action mappings as needed -->
+        <label for="action3">Right Click:</label>
+        <select name="handle_right_click" id="action3">
+            <option value="MID">MID - default</option>
+            <option value="RING">RING</option>
+            <option value="PINKY">PINKY</option>
+        </select>
+
+        <label for="action4">Drag:</label>
+        <select name="handle_drag" id="action4">
+            <option value="FIST">FIST - default</option>
+            <option value="PALM">PALM</option>
+            <option value="V_GEST">V_GEST</option>
+        </select>
+
+        <label for="action5">Double Click:</label>
+        <select name="handle_double_click" id="action5">
+            <option value="FIRST2">FIRST 2 fingers</option>
+            <option value="LAST4">LAST 4 fingers</option>
+            <option value="LAST3">LAST 3 fingers</option>
+        </select>
+
         
-        <input type="submit" value="Save Mappings">
+
+        <!-- Add more actions and gestures here -->
+
+        <input type="submit" value="Save">
     </form>
+
+    <br>
+    <a href="/">Back to Homepage</a>
 </body>
 </html>
+
