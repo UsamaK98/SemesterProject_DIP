@@ -2,7 +2,7 @@
 
 This project aims to implement a gesture-controlled virtual mouse using OpenCV, Mediapipe, PyAutoGUI, and other essential Python libraries. This software leverages real-time hand gesture recognition using Mediapipe hands to detect hands' motion and position.
 
-## Features
+## Main Features
 
 - Recognizes hand gestures from camera input.
 - Maps gestures to specific functions such as controlling mouse movements, clicks, right-clicks or double-clicks, making sound, and scrolling up/down or right/left.
@@ -14,7 +14,7 @@ This project aims to implement a gesture-controlled virtual mouse using OpenCV, 
 - Background color change option using hand gestures (thumbs up -> black & thumbs down -> white).
 - Integrates with PyAudio to adjust sound levels based on pinch input.
 
-### Optional Features
+### Optional Features - (To be added)
 
 - Display the detected gesture label as text on the screen or a small overlay.
 - Add more gestures to control other functionalities.
