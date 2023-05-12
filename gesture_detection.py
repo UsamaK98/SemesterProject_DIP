@@ -372,26 +372,26 @@ class Controller:
              # Check if the binary encoding of the gesture is in the allowed set
             allowed_encodings = {0, 1, 2, 4, 7, 8, 12, 15, 16, 31, 33, 34, 35, 36}
             #print(gesture.name)
-            if gesture.binary_encoding in allowed_encodings:
-                if gesture == Gest.PINCH_MINOR:
-                    if cls.pinchminorflag == False:
-                        cls.pinch_control_init(hand_result)
-                        cls.pinchminorflag = True
-                    #cls.pinch_control(hand_result, cls.scrollHorizontal, cls.scrollVertical)
-                    cls.handle_scroll(hand_result)
-                elif gesture == Gest.PINCH_MAJOR:
-                    if cls.pinchmajorflag == False:
-                        cls.pinch_control_init(hand_result)
-                        cls.pinchmajorflag = True
-                    cls.pinch_control(hand_result, cls.changesystemvolume)
-                else:
-
-                    gesture_name = gesture.name
-                    cls.pinchmajorflag=False
-                    cls.pinchminorflag=False
-                    cls.execute_action(gesture_name, hand_result)
+            #if gesture.binary_encoding in allowed_encodings:
+            if gesture == Gest.PINCH_MINOR:
+                if cls.pinchminorflag == False:
+                    cls.pinch_control_init(hand_result)
+                    cls.pinchminorflag = True
+                #cls.pinch_control(hand_result, cls.scrollHorizontal, cls.scrollVertical)
+                cls.handle_scroll(hand_result)
+            elif gesture == Gest.PINCH_MAJOR:
+                if cls.pinchmajorflag == False:
+                    cls.pinch_control_init(hand_result)
+                    cls.pinchmajorflag = True
+                cls.pinch_control(hand_result, cls.changesystemvolume)
             else:
-                print(f"Gesture {gesture.name} with binary encoding {gesture.binary_encoding} is not allowed.")
+
+                gesture_name = gesture.name
+                cls.pinchmajorflag=False
+                cls.pinchminorflag=False
+                cls.execute_action(gesture_name, hand_result)
+            #else:
+              #  print(f"Gesture {gesture.name} with binary encoding {gesture.binary_encoding} is not allowed.")
       
 '''
 ----------------------------------------  Main Class  ----------------------------------------
