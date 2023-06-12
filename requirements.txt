@@ -2,3 +2,5 @@ opencv-python
 mediapipe
 pyautogui
 flask
+comtypes
+pycaw
